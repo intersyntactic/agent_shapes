@@ -1,10 +1,10 @@
-// An install minting its agent's id on first boot, and the agent naming
-// itself, then renaming itself.
+// An agent naming itself, then renaming itself.
 import 'package:is_agent_shapes/is_agent_shapes.dart';
+import 'package:is_shapes/is_shapes.dart';
 
 void main() {
-  // Once, on first boot. The install keeps it.
-  final id = mintAgentId();
+  // The id the install minted on first boot and keeps. Its tail is opaque.
+  final id = ActorId.parse('agent:7f3a9c21')!;
 
   // The first node the agent writes says what it is called.
   final named = AgentName(agent: id, name: 'Wren');

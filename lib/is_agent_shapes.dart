@@ -1,18 +1,19 @@
-/// What an agent writes to say what it is called, and the id that names it in
-/// every node it writes.
+/// What an agent writes to say what it is called.
 ///
 /// An agent's actor id is `agent:<id>`, an opaque id its install mints once,
-/// on first boot, with [mintAgentId], and keeps. Its name is not part of the
-/// id: the agent chooses its name, the name can change, and the id never
-/// does, so a rename leaves every node the agent has written still naming it.
-/// The name is an [AgentName], a node in the line like any other.
+/// on first boot, and keeps. Its name is not part of the id: the agent chooses
+/// its name, the name can change, and the id never does, so a rename leaves
+/// every node the agent has written still naming it. The name is an
+/// [AgentName], a node in the line like any other.
 ///
-/// It imports only `is_shapes` and `dart:math`, so a shape file may import it
-/// under import admission's pure list once it is on it
+/// It declares and runs nothing else. How an install mints the id is the
+/// install's business: the tail is opaque, so no reader looks inside it, and
+/// [ActorId.parse] is the only check it has to pass.
+///
+/// It imports only `is_shapes`, so a shape file may import it under import
+/// admission's pure list once it is on it
 /// (https://github.com/enspyrco/intersyntactic/issues/1046).
 library;
-
-import 'dart:math';
 
 import 'package:is_shapes/is_shapes.dart';
 
@@ -38,20 +39,4 @@ final class AgentName {
 
   /// The name the agent chose.
   final String name;
-}
-
-/// A fresh agent id: `agent:` and 128 random bits in lower-case hex, from
-/// [Random.secure].
-///
-/// An install calls this once, on first boot, and keeps what it returns.
-/// Calling it again makes a different agent, not the same one renamed. It
-/// keeps nothing itself: keeping the id is the install's business, and this
-/// package imports no `dart:io`.
-ActorId mintAgentId() {
-  final random = Random.secure();
-  final hex = StringBuffer();
-  for (var i = 0; i < 16; i++) {
-    hex.write(random.nextInt(256).toRadixString(16).padLeft(2, '0'));
-  }
-  return ActorId.parse('agent:$hex')!;
 }

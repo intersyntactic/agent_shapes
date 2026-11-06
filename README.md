@@ -1,7 +1,6 @@
 # is_agent_shapes
 
-What an intersyntactic agent writes to say what it is called, and the opaque
-agent id its install mints once and keeps.
+What an intersyntactic agent writes to say what it is called.
 
 An agent's actor id is `agent:<id>`. The id is opaque: its install mints it
 once, on first boot, and keeps it. The name is separate, because the agent
@@ -11,9 +10,10 @@ changes.
 
 ```dart
 import 'package:is_agent_shapes/is_agent_shapes.dart';
+import 'package:is_shapes/is_shapes.dart';
 
-// Once, on first boot. The install keeps it.
-final id = mintAgentId();
+// The id the install minted on first boot and keeps.
+final id = ActorId.parse('agent:7f3a9c21')!;
 
 // The first node the agent writes says what it is called.
 final named = AgentName(agent: id, name: 'Wren');
@@ -29,9 +29,6 @@ final renamed = AgentName(agent: id, name: 'Kestrel');
   later pass of the same node, at the same anchor, and a reader takes the
   latest. It holds no time, because the line's order already says which pass
   is latest.
-- `mintAgentId`: a fresh `agent:<id>`, 128 random bits from `Random.secure`
-  in lower-case hex. An install calls it once and keeps what it returns.
-  Calling it again makes a different agent, not the same one renamed.
 
 ## The rule a reader keeps
 
@@ -48,18 +45,18 @@ name for it.
 
 ## What it doesn't do
 
-It keeps nothing. Keeping the id across restarts is the install's job,
-usually in a file beside the service, so this package imports no `dart:io`.
-That split is what lets a shape file import it.
+It mints nothing and keeps nothing. The install mints its agent's id on first
+boot, in whatever form it likes as long as `ActorId.parse` reads it, and keeps
+it. The tail is opaque, so no reader looks inside it, and its form is no one
+else's contract. This package declares a shape and nothing that runs.
 
 ## The pure list
 
 A shape file may import only what import admission's pure list allows
 ([#1046](https://github.com/enspyrco/intersyntactic/issues/1046)). This
-package imports only `is_shapes` and `dart:math`, so it has to be added to
-that list beside them. `test/pure_list_test.dart` holds it to the list, and it
-reads directives from the parse tree, so every branch of a conditional import
-is read.
+package imports only `is_shapes`, so it has to be added to that list beside
+it. `test/pure_list_test.dart` holds it to the list, and it reads directives
+from the parse tree, so every branch of a conditional import is read.
 
 ## Depending on it
 

@@ -1,7 +1,7 @@
 name: is_agent_shapes
 description: >-
-  What an intersyntactic agent writes to say what it is called, and the
-  opaque agent id its install mints once and keeps.
+  What an intersyntactic agent writes to say what it is called: AgentName, a
+  node about the agent's id whose value is the name it chose.
 version: 0.1.0
 repository: https://github.com/intersyntactic/agent_shapes
 
