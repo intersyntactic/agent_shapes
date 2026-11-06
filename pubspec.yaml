@@ -1,0 +1,17 @@
+name: is_agent_shapes
+description: >-
+  What an intersyntactic agent writes to say what it is called, and the
+  opaque agent id its install mints once and keeps.
+version: 0.1.0
+repository: https://github.com/intersyntactic/agent_shapes
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  is_shapes: ^0.3.0
+
+dev_dependencies:
+  analyzer: ^14.7.0
+  lints: ^6.1.0
+  test: ^1.33.0
