@@ -4,7 +4,7 @@
 /// on first boot, and keeps. Its name is not part of the id: the agent chooses
 /// its name, the name can change, and the id never does, so a rename leaves
 /// every node the agent has written still naming it. The name is an
-/// [AgentName], a node in the line like any other.
+/// [AgentName], a node in a journey path like any other.
 ///
 /// It declares and runs nothing else. How an install mints the id is the
 /// install's business: the tail is opaque, so no reader looks inside it, and
@@ -21,8 +21,8 @@ import 'package:is_shapes/is_shapes.dart';
 ///
 /// The node is about [agent], its [identity]; [name] is its value. So a rename
 /// is a later pass of the same node, at the same anchor, saying a new name,
-/// and a reader takes the latest pass. There is no time in it: the line's
-/// order says which pass is latest.
+/// and a reader takes the latest pass. There is no time in it: the journey
+/// path's order says which pass is latest.
 ///
 /// A pass counts only when [agent] wrote it. The shape can't check that, so a
 /// reader discards a pass written by anyone else: an agent's name is the

@@ -27,8 +27,8 @@ final renamed = AgentName(agent: id, name: 'Kestrel');
 - `AgentName`: what an agent calls itself. Its `agent` is marked `@identity`,
   so the node is about the agent, and its `name` is its value. A rename is a
   later pass of the same node, at the same anchor, and a reader takes the
-  latest. It holds no time, because the line's order already says which pass
-  is latest.
+  latest. It holds no time, because the journey path's order already says
+  which pass is latest.
 
 ## The rule a reader keeps
 
