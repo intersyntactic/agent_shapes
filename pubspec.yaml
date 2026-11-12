@@ -1,7 +1,8 @@
 name: is_agent_shapes
 description: >-
-  What an intersyntactic agent writes to say what it is called: AgentName, a
-  node about the agent's id whose value is the name it chose.
+  Shapes for an intersyntactic agent's conversation: AgentName, a node about
+  the agent's id whose value is the name it chose; UserSaid, what a person
+  said; and ReplyText, the agent's reply to it.
 version: 0.1.0
 repository: https://github.com/intersyntactic/agent_shapes
 
