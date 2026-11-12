@@ -1,4 +1,6 @@
 // An agent naming itself, then renaming itself.
+import 'dart:typed_data';
+
 import 'package:is_agent_shapes/is_agent_shapes.dart';
 import 'package:is_shapes/is_shapes.dart';
 
@@ -14,4 +16,22 @@ void main() {
   final renamed = AgentName(agent: id, name: 'Kestrel');
 
   print('${named.agent} was ${named.name}, and is ${renamed.name}');
+
+  // A person's message, as Teams received it.
+  final peter = ActorId.parse('teams:f6a2.../b901...')!;
+  final said = UserSaid(
+    author: peter,
+    source: 'f:abc123', // the Teams activity id
+    text: 'how is the demo coming?',
+  );
+  print('${said.author} said: ${said.text}');
+
+  // The journey path mints a TurnId for `said` when it is appended; here we
+  // stand one in, since nothing is actually being stored.
+  final saidId = TurnId.of(Uint8List(0));
+
+  // The agent's reply answers it by that id, not by matching text.
+  final reply = ReplyText(by: id, answers: saidId, text: 'nearly there');
+
+  print('${reply.by} answers ${reply.answers}: ${reply.text}');
 }
