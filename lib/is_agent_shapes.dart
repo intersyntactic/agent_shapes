@@ -17,6 +17,9 @@
 /// (https://github.com/enspyrco/intersyntactic/issues/1090). Both are facts,
 /// written once and never revised, so neither declares `@identity`: every
 /// field is identity, the safe default for a node nothing ever corrects.
+/// [SourceMessageId] is the typed id [UserSaid.source] carries, so a message
+/// id stays a message id and never drifts into a bare [String] that any
+/// field could be built from.
 ///
 /// It imports only `is_shapes`, so a shape file may import it under import
 /// admission's pure list once it is on it
@@ -49,12 +52,38 @@ final class AgentName {
   final String name;
 }
 
-/// What a person said, as a module received it from its source.
+/// A message's id in its source's own terms: a Teams activity id, a Slack
+/// `ts`. Opaque here, like [ActorId]'s tail — is_agent_shapes doesn't know
+/// Teams or Slack, so it can't say what either one's ids look like, only
+/// that a [UserSaid] carries one and not a bare [String] that any module
+/// could build out of the wrong characters.
 ///
-/// [source] names the message in its source's own terms: a Teams activity
-/// id, a Slack `ts`. It is a plain string because what counts as well formed
-/// is each source's business, not this shape's; a module that needs to parse
-/// its own source's ids wraps this field on its own side.
+/// A module that must tell Teams' ids from Slack's wraps this field on its
+/// own side, the way `SlackActorId` wraps [ActorId] in `slack_module`.
+final class SourceMessageId {
+  const SourceMessageId._(this.value);
+
+  /// The id, as its source wrote it.
+  final String value;
+
+  /// [s] as a source message id, read back from text; null for an empty
+  /// string or one with leading, trailing or inner whitespace, since no
+  /// known source's ids have any.
+  static SourceMessageId? parse(String s) =>
+      s.isNotEmpty && !s.contains(RegExp(r'\s')) ? SourceMessageId._(s) : null;
+
+  @override
+  bool operator ==(Object other) =>
+      other is SourceMessageId && other.value == value;
+
+  @override
+  int get hashCode => value.hashCode;
+
+  @override
+  String toString() => value;
+}
+
+/// What a person said, as a module received it from its source.
 ///
 /// There is no echo-matching here: a module writes [UserSaid] once, the
 /// journey path hands it back a [TurnId] on append, and that is the id
@@ -75,9 +104,8 @@ final class UserSaid {
   /// Who said it.
   final ActorId author;
 
-  /// The message's id in its source's own terms (a Teams activity id, a
-  /// Slack `ts`).
-  final String source;
+  /// The message's id in its source's own terms.
+  final SourceMessageId source;
 
   /// What they said.
   final String text;

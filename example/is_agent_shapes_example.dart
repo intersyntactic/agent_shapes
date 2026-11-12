@@ -21,7 +21,7 @@ void main() {
   final peter = ActorId.parse('teams:f6a2.../b901...')!;
   final said = UserSaid(
     author: peter,
-    source: 'f:abc123', // the Teams activity id
+    source: SourceMessageId.parse('1234567890.123456')!, // the activity id
     text: 'how is the demo coming?',
   );
   print('${said.author} said: ${said.text}');
