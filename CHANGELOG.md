@@ -2,11 +2,10 @@
 
 ## 0.1.0
 
-- First release as `is_conversation_shapes`, renamed from `is_agent_shapes`
-  (https://github.com/enspyrco/intersyntactic/issues/1090): the package held
-  `UserSaid`, a person-authored shape, which made the old name's framing —
-  "who writes it" rather than "which modules need it" — visibly wrong.
-  `is_agent_shapes` is discontinued on pub.dev in this package's favour.
+- First release as `is_conversation_shapes`
+  (https://github.com/enspyrco/intersyntactic/issues/1090): named for which
+  modules need a shape, not for who writes it — `UserSaid` is
+  person-authored, and belongs here on that test regardless.
 - `AgentName`: what an agent calls itself. Its identity is the agent's
   `agent:<id>`, which names the agent in every node it writes, and its value
   is the name, which can change while the id never does.
