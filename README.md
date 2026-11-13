@@ -90,8 +90,7 @@ is no one else's contract.
 
 ## The pure list
 
-A shape file may import only what import admission's pure list allows
-([#1046](https://github.com/enspyrco/intersyntactic/issues/1046)). This
+A shape file may import only what import admission's pure list allows. This
 package imports only `is_shapes`, so it has to be added to that list beside
 it. `test/pure_list_test.dart` holds it to the list, and it reads directives
 from the parse tree, so every branch of a conditional import is read.

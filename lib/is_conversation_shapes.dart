@@ -2,10 +2,10 @@
 /// module carries one, not only the agent: what an agent calls itself, what
 /// a person said, and the agent's reply to it.
 ///
-/// Named for what needs these shapes, not for who writes each one
-/// (https://github.com/enspyrco/intersyntactic/issues/1090): [UserSaid] is
-/// person-authored, and this package held it anyway, because the test
-/// RULINGS gives a package like this is "which modules need the shape,"
+/// Named for what needs these shapes, not for who writes each one:
+/// [UserSaid] is person-authored, and this package held it anyway, because
+/// the test RULINGS gives a package like this is "which modules need the
+/// shape,"
 /// the same test that put `Comment`/`Correction`/`Approve`/`Seen` in
 /// `is_annotation_shapes` regardless of who annotates. It was named
 /// `is_agent_shapes` first and renamed once `UserSaid` made the mismatch
@@ -23,8 +23,7 @@
 ///
 /// [UserSaid] and [ReplyText] are the minimum a module needs to carry a
 /// Teams or Slack conversation across a journey path: one shape for what
-/// a person said, one for the agent's reply to it
-/// (https://github.com/enspyrco/intersyntactic/issues/1090). Both are facts,
+/// a person said, one for the agent's reply to it. Both are facts,
 /// written once and never revised, so neither declares `@identity`: every
 /// field is identity, the safe default for a node nothing ever corrects.
 /// [SourceMessageId] is the typed id [UserSaid.source] carries, so a message
@@ -32,8 +31,7 @@
 /// field could be built from.
 ///
 /// It imports only `is_shapes`, so a shape file may import it under import
-/// admission's pure list once it is on it
-/// (https://github.com/enspyrco/intersyntactic/issues/1046).
+/// admission's pure list once it is on it.
 library;
 
 import 'package:is_shapes/is_shapes.dart';
@@ -63,7 +61,7 @@ final class AgentName {
 }
 
 /// A message's id in its source's own terms: a Teams activity id, a Slack
-/// `ts`. Opaque here, like [ActorId]'s tail — is_agent_shapes doesn't know
+/// `ts`. Opaque here, like [ActorId]'s tail — this package doesn't know
 /// Teams or Slack, so it can't say what either one's ids look like, only
 /// that a [UserSaid] carries one and not a bare [String] that any module
 /// could build out of the wrong characters.
@@ -126,9 +124,8 @@ final class UserSaid {
 /// The agent's reply to one [UserSaid], written once, when the message it
 /// answers is finished.
 ///
-/// A streamed reply is shown live and never stored piece by piece
-/// (https://github.com/enspyrco/intersyntactic/issues/1090#issuecomment-6811669435):
-/// this is the one pass a message gets, not the latest of several.
+/// A streamed reply is shown live and never stored piece by piece: this is
+/// the one pass a message gets, not the latest of several.
 ///
 /// [answers] is the [TurnId] the journey path delivered back for the
 /// [UserSaid] once it was appended. It is how a module knows which

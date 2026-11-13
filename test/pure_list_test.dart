@@ -4,9 +4,8 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:test/test.dart';
 
-/// Import admission's pure list
-/// (https://github.com/enspyrco/intersyntactic/issues/1046): what a shape
-/// file may import, so all this package may import too.
+/// Import admission's pure list: what a shape file may import, so all this
+/// package may import too.
 const _pureSdk = {
   'dart:async',
   'dart:collection',
