@@ -85,14 +85,16 @@ final class SourceMessageId {
 
 /// What a person said, as a module received it from its source.
 ///
-/// There is no echo-matching here: a module writes [UserSaid] once, the
-/// journey path hands it back a [TurnId] on append, and that is the id
-/// everything after it — not least [ReplyText.answers] — points at. A
-/// module never has to compare text to tell its own message from an echo of
-/// it.
+/// There is no echo-matching here: a module describes a [UserSaid] once, the
+/// composition appends it after the airlock has witnessed its arrival, and
+/// the journey path delivers the [TurnId] it was given back to the module —
+/// that is the id everything after it, not least [ReplyText.answers], points
+/// at. A module never has to compare text to tell its own message from an
+/// echo of it, and it never appends on its own behalf
+/// (https://github.com/intersyntactic/teams_module/pull/13).
 ///
-/// "Who may write a [UserSaid]" is the owner gate: an acceptor refuses one
-/// from a module that does not own [author]'s source, so one module can
+/// "Who may write a [UserSaid]" is the owner gate: enforced once, outside
+/// every module, by whatever appends on their behalf, so one module can
 /// never put words in another's mouth.
 final class UserSaid {
   const UserSaid({
@@ -118,11 +120,11 @@ final class UserSaid {
 /// (https://github.com/enspyrco/intersyntactic/issues/1090#issuecomment-6811669435):
 /// this is the one pass a message gets, not the latest of several.
 ///
-/// [answers] is the [TurnId] the journey path gave the [UserSaid] on append.
-/// It is how a module knows which conversation to post into and which
-/// message to thread under, and it is what makes two replies two different
-/// nodes: each answers a different message, so no turn number or index is
-/// needed alongside it.
+/// [answers] is the [TurnId] the journey path delivered back for the
+/// [UserSaid] once it was appended. It is how a module knows which
+/// conversation to post into and which message to thread under, and it is
+/// what makes two replies two different nodes: each answers a different
+/// message, so no turn number or index is needed alongside it.
 final class ReplyText {
   const ReplyText({
     required this.by,
@@ -133,7 +135,7 @@ final class ReplyText {
   /// The agent that wrote the reply.
   final ActorId by;
 
-  /// The [UserSaid] this replies to, by the [TurnId] it was given on append.
+  /// The [UserSaid] this replies to, by the [TurnId] it was delivered back.
   final TurnId answers;
 
   /// What the agent said back.
