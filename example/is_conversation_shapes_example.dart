@@ -1,7 +1,7 @@
-// An agent naming itself, then renaming itself.
+// An agent naming itself, a person's message, and the agent's reply to it.
 import 'dart:typed_data';
 
-import 'package:is_agent_shapes/is_agent_shapes.dart';
+import 'package:is_conversation_shapes/is_conversation_shapes.dart';
 import 'package:is_shapes/is_shapes.dart';
 
 void main() {
@@ -26,8 +26,8 @@ void main() {
   );
   print('${said.author} said: ${said.text}');
 
-  // The journey path mints a TurnId for `said` when it is appended; here we
-  // stand one in, since nothing is actually being stored.
+  // The journey path delivers back a TurnId for `said` once it's appended;
+  // here we stand one in, since nothing is actually being stored.
   final saidId = TurnId.of(Uint8List(0));
 
   // The agent's reply answers it by that id, not by matching text.

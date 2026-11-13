@@ -1,10 +1,10 @@
-name: is_agent_shapes
+name: is_conversation_shapes
 description: >-
-  Shapes for an intersyntactic agent's conversation: AgentName, a node about
-  the agent's id whose value is the name it chose; UserSaid, what a person
+  Shapes for a journey path's conversation, needed by whichever modules
+  carry one: AgentName, what an agent calls itself; UserSaid, what a person
   said; and ReplyText, the agent's reply to it.
 version: 0.1.0
-repository: https://github.com/intersyntactic/agent_shapes
+repository: https://github.com/intersyntactic/conversation_shapes
 
 environment:
   sdk: ^3.13.0

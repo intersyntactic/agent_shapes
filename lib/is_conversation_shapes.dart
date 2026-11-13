@@ -1,5 +1,15 @@
-/// What an agent writes to say what it is called, and the two shapes a
-/// conversation turns on: what a person said, and the agent's reply to it.
+/// The shapes a journey path's conversation turns on, needed by whichever
+/// module carries one, not only the agent: what an agent calls itself, what
+/// a person said, and the agent's reply to it.
+///
+/// Named for what needs these shapes, not for who writes each one
+/// (https://github.com/enspyrco/intersyntactic/issues/1090): [UserSaid] is
+/// person-authored, and this package held it anyway, because the test
+/// RULINGS gives a package like this is "which modules need the shape,"
+/// the same test that put `Comment`/`Correction`/`Approve`/`Seen` in
+/// `is_annotation_shapes` regardless of who annotates. It was named
+/// `is_agent_shapes` first and renamed once `UserSaid` made the mismatch
+/// visible; `is_agent_shapes` on pub.dev is discontinued in its favour.
 ///
 /// An agent's actor id is `agent:<id>`, an opaque id its install mints once,
 /// on first boot, and keeps. Its name is not part of the id: the agent chooses
