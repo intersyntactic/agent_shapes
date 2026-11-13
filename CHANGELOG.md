@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Dropped every link to a private issue tracker from docs and comments;
+  the prose they supported stays, minus the citation.
+
 ## 0.1.0
 
 - First release as `is_conversation_shapes`: named for which modules need a

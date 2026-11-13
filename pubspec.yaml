@@ -3,7 +3,7 @@ description: >-
   Shapes for a journey path's conversation, needed by whichever modules
   carry one: AgentName, what an agent calls itself; UserSaid, what a person
   said; and ReplyText, the agent's reply to it.
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/intersyntactic/conversation_shapes
 
 environment:
