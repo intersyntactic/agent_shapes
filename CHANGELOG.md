@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+- Widened `is_shapes` to `^0.4.0`, which renames `Withdraw` to `Withdrawal`
+  — a rename this package never touches — so modules can take that rename
+  without `is_conversation_shapes` blocking the solve.
+
 ## 0.1.1
 
 - Dropped every link to a private issue tracker from docs and comments;
